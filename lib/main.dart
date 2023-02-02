@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get.dart';
 import 'package:getx/Homepage.dart';
 
 void main() {
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      defaultTransition: Transition.zoom,
       initialRoute: '/',
       getPages: [
         GetPage(
@@ -20,7 +21,11 @@ class MyApp extends StatelessWidget {
           page: () => const MyApp(),
         ),
         GetPage(
-          name: '/Home', page: () => const Home())
+          name: '/Home',
+          transition: Transition.leftToRight,
+          page: () => const Home(),
+        ),
+        GetPage(name: '/NextScreen/: SomeValue', page: () => const Home())
       ],
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -39,6 +44,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var count = 0.obs;
+  void increment() {
+    count++;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,12 +57,18 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
-              child: const Text('Next screen'),
-            )
+              onPressed: () async {
+                await Get.toNamed('/Home');
+              },
+              child: const Text('Next screen')),
+            
           ],
         ),
       ),
     );
   }
 }
+// .offNamed Go to next screen but no option to return to previous screen
+//  .offAllNamed Go to home screen and cancel all previous screen /routes
+// dynamic url link
+// Get.toNamed - 
