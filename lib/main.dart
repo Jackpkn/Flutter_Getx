@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/Home',
           transition: Transition.leftToRight,
-          page: () => const Home(),
+          page: () => Home(),
         ),
-        GetPage(name: '/NextScreen/: SomeValue', page: () => const Home())
+        GetPage(name: '/NextScreen/: SomeValue', page: () => Home())
       ],
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -57,11 +57,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () async {
-                await Get.toNamed('/Home');
-              },
-              child: const Text('Next screen')),
-            
+                onPressed: () async {
+                  await Get.toNamed('/Home');
+                },
+                child: const Text('Next screen')),
           ],
         ),
       ),
